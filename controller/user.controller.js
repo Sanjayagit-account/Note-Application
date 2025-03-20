@@ -86,3 +86,34 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+//GetUser
+
+exports.getUser = async (req, res) => {
+    try {
+        const userId = req.user.id; // Assuming you're using middleware to verify JWT
+        const user = await User.findById(userId) //.select("-password"); // Exclude password
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+//LogOut User
+
+// Logout User
+exports.logout = async (req, res) => {
+    try {
+        
+        res.clearCookie("token"); // If using cookies for JWT storage
+        res.status(200).json({ message: "Logout successful" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+

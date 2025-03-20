@@ -10,8 +10,8 @@ const noteSchema = new mongoose.Schema({
         required: true,
     },
     tags: {
-        type: [String], // Fixed: Changed "string" to "String"
-        default: [],
+        type: [String], // Ensures tags are stored as an array of strings
+      
     },
     isPinned: {
         type: Boolean,

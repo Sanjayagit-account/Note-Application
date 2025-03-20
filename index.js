@@ -1,12 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Import CORS
 const User = require('./model/user.model'); 
-//const Note = require("./model/note.model")
+const Note = require("./model/note.model")
 const dotenv = require('dotenv').config();
 const userRouts= require('./routes/user.routes')
 const noteRouts = require('./routes/note.routs')
 const app = express();
 
+
+app.use(cors({
+  origin: "http://localhost:5173", // Allow requests from your frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true // If you're using cookies or authentication headers
+}));
 // Middleware
 app.use(express.json());
 
